@@ -1,0 +1,60 @@
+﻿<Window x:Class="DaggerPlotter.DialogTagsHelperWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DaggerPlotter"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow"
+        Icon="Resources/icon.png"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="Action-Tag-Hilfe" Height="500" Width="850">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="BEFEHL"/>
+        <Label Content="BEDEUTUNG" Grid.Column="1"/>
+        <Label Content="BESCHREIBUNG" Grid.Column="2"/>
+        <Label Content="{}{item#i&lt;#c&gt;}" Grid.Row="1"/>
+        <Label Content="Gain Item" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="Gibt dem Spieler c mal (default : 1) das Item mit der ID i." Grid.Row="1" Grid.Column="2"/>
+        <Label Content="{}{bs#t}" Grid.Row="2"/>
+        <Label Content="Blackscreen" Grid.Row="2" Grid.Column="1"/>
+        <Label Content="Faded einen Blackscreen ein, der t Sekunden lang anhält." Grid.Row="2" Grid.Column="2"/>
+        <Label Content="{}{en#o}" Grid.Row="3"/>
+        <Label Content="Enable Object" Grid.Row="3" Grid.Column="1"/>
+        <Label Content="Ruft o.gameObject.setActive(true) auf. O ist der Name des Objekts in dieser Szene." Grid.Row="3" Grid.Column="2"/>
+        <Label Content="{}{ds#o}" Grid.Row="4"/>
+        <Label Content="Disable Object" Grid.Row="4" Grid.Column="1"/>
+        <Label Content="Ruft o.gameObject.setActive(false) auf. O ist der Name des Objekts in dieser Szene." Grid.Row="4" Grid.Column="2"/>
+        <Label Content="{}{jmp#l}" Grid.Row="5"/>
+        <Label Content="Jump to line" Grid.Row="5" Grid.Column="1"/>
+        <Label Content="Springt NACH dieser Dialogzeile zur Dialogzeile l." Grid.Row="5" Grid.Column="2"/>
+        <Label Content="{}{shop}" Grid.Row="6"/>
+        <Label Content="Open Shop" Grid.Row="6" Grid.Column="1"/>
+        <Label Content="Öffnet den Laden des Besitzers." Grid.Row="6" Grid.Column="2"/>
+    </Grid>
+</Window>

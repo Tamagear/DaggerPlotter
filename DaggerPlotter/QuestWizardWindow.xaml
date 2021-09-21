@@ -1,0 +1,110 @@
+﻿<Window x:Class="DaggerPlotter.QuestWizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DaggerPlotter"
+        xmlns:xctk ="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Icon="Resources/icon.png"
+        Title="Neue Quest" Height="350" Width="525">
+    <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" BackButtonContent="Zurück" NextButtonContent="Weiter" CancelButtonContent="Abbrechen" HelpButtonContent="Hilfe" FinishButtonContent="Erstellen" HelpButtonVisibility="Hidden" CanFinish="False" Finish="Wizard_Finish">
+        <xctk:WizardPage x:Name="IntroPage" PageType="Interior" Title="Neue Quest erstellen" Description="Folge den Anweisungen auf dieser Seite, um eine neue Quest zu erstellen. Ein VQTL-Dokument wird im Projektverzeichnis erstellt." NextPage="{Binding ElementName=DetailPage}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5px"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Quest-Name" ToolTip="Der Name der Quest. Dieser muss NICHT einzigartig sein, aber es ist eine gute Idee, Folgequest-Namen mit (römischen) Zahlen zu erweitern."/>
+                <Label Content="Ist Hauptquest" ToolTip="Handelt es sich bei der Quest um eine Hauptquest (true) oder eine Nebenquest (false)?" Height="25" VerticalAlignment="Top" Margin="0, 20"/>
+                <Label Content="Quest-ID" ToolTip="Die interne Identifikationsnummer der Quest. Muss einzigartig sein. Sollte für Entwickler einfach zu verstehen gewählt werden." Height="25" VerticalAlignment="Top" Margin="0, 40"/>
+                <Label Content="Vorherige-Quest-ID" ToolTip="Eine Liste der vorherigen Quest-IDs einer Questreihe. Wird benötigt, um den korrekten Questverlauf anzeigen zu können. Die Parent-IDs der Parents werden dabei übernommen." Height="25" VerticalAlignment="Top" Margin="0, 60"/>
+                <Label Content="Quest-Geber" ToolTip="Der Name des Quest-Gebers im Spiel." Height="25" VerticalAlignment="Top" Margin="0, 80"/>
+                <Label Content="Muss abgegeben werden" ToolTip="Muss der Spieler nochmal mit dem Quest-Geber sprechen (true) oder gilt die Quest nach erledigen aller Aufgaben sofort als beendet (false)?" Height="28" VerticalAlignment="Bottom" Margin="0,60"/>
+                <Label Content="Empfohlendes Level" ToolTip="Der Level, ab welchem die Quest empfohlen wird. 0 heißt, dass dieser Wert immer gleich dem Spielerlevel ist (Sie skaliert)." Height="25" VerticalAlignment="Bottom" Margin="0, 40"/>
+                <Label Content="Baustein-Typ" ToolTip="Handelt es sich um einen Scene-, Action-, oder No-Gameplay-Baustein? Je nachdem ändert sich die Farbe im Visualizer." Height="25" VerticalAlignment="Bottom" Margin="0, 15"/>
+                <TextBox Name="TextBox_QuestNameTextBox" Grid.Column="2" Text="Neue Quest" Height="22" VerticalAlignment="Top"/>
+                <ToggleButton Name="Toggle_MainQuestToggle" Grid.Column="2" Height="15" Width="15" VerticalAlignment="Top" Margin="0, 23"/>
+                <TextBox Name="TextBox_QuestIDTextBox" Grid.Column="2" Text="neue_quest" Height="20" VerticalAlignment="Top" Margin="0, 40"/>
+                <TextBox Name="TextBox_QuestParentIDTextBox" Grid.Column="2" Height="20" VerticalAlignment="Top" Margin="0, 62"/>
+                <TextBox Name="TextBox_QuestGiverTextBox" Grid.Column="2" Height="20" VerticalAlignment="Top" Margin="0, 82"/>
+                <ToggleButton Name="Toggle_GoBackToggle" Grid.Column="2" MinHeight="15" MaxHeight="15" Width="15" VerticalAlignment="Bottom" Margin="0, 65"/>
+                <Label Name="Label_LevelLabel" Content="5" Grid.Column="2" VerticalAlignment="Bottom" Margin="300,0,0,42" FontSize="10" Width="20"/>
+                <Slider Name="Slider_LevelSlider" Grid.Column="2" Height="30" VerticalAlignment="Bottom" Margin="0,0,20,35" Minimum="0" Maximum="99" Value="5" TickPlacement="BottomRight" IsSnapToTickEnabled="True" ValueChanged="Slider_LevelSlider_ValueChanged"/>
+                <xctk:DropDownButton x:Name="DropDown_BuildTypeDropDown" Content="Scene-Baustein" Grid.Column="2" VerticalAlignment="Bottom" Margin="0, 22" Background="CornflowerBlue">
+                    <xctk:DropDownButton.DropDownContent>
+                        <StackPanel Width="315">
+                            <Button Content="Scene-Baustein" Background="CornflowerBlue" Click="Dropdown_SceneType_Click"/>
+                            <Button Content="Action-Baustein" Background="PaleVioletRed" Click="Dropdown_ActionType_Click"/>
+                            <Button Content="No-Gameplay-Baustein" Background="DarkSeaGreen" Click="Dropdown_NoGameplayType_Click"/>
+                        </StackPanel>
+                    </xctk:DropDownButton.DropDownContent>
+                </xctk:DropDownButton>
+            </Grid>
+        </xctk:WizardPage>
+        <xctk:WizardPage x:Name="DetailPage" PageType="Interior" Title="Quest-Details eingeben" Description="Gib die Details für die neue Quest ein." NextPage="{Binding ElementName=TaskPage}" PreviousPage="{Binding ElementName=IntroPage}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5px"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5px"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Quest-Beschreibung" ToolTip="Eine möglichst knappe Beschreibung, was der Spieler tun muss. Am besten im Imperativ mit einem Verb beginnen."/>
+                <Label Content="Quest-Hintergrund" ToolTip="Eine längere Beschreibung, die die Quest etwas detaillierter erklärt. Gibt es Vorgänger-Quests, so wird dieser Hintergrund an die alten hinten angefügt." Grid.Row="2"/>
+                <TextBox Name="TextBox_QuestDescriptionTextBox" Grid.Column="2" Text="Finde Timmys Buch!"/>
+                <TextBox Name="TextBox_QuestBackgroundTextBox" Grid.Row="2" Grid.Column="2"/>
+            </Grid>
+        </xctk:WizardPage>
+        <xctk:WizardPage x:Name="TaskPage" PageType="Interior" Title="Aufgaben-Details eingeben" Description="Gib die Details für die neue Quest ein." NextPage="{Binding ElementName=RewardPage}" PreviousPage="{Binding ElementName=DetailPage}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5px"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Aufgaben-Typ" ToolTip="Was genau muss der Spieler machen?"/>
+                <Label Content="Ziel" ToolTip="Der Name des Ziels im Spiel." Margin="0, 30"/>
+                <Label Content="Anzahl" ToolTip="Die Häufigkeit, in welcher die Aufgabe wiederholt werden muss." Margin="0, 60"/>
+                <xctk:DropDownButton x:Name="DropDown_TaskTypeDropDown" Content="Sprich mit" Grid.Column="2" VerticalAlignment="Top" Height="25">
+                    <xctk:DropDownButton.DropDownContent>
+                        <StackPanel Width="315">
+                            <Button Content="Sprich mit" Click="DropDown_TaskTalk_Click"/>
+                            <Button Content="Interagiere mit" Click="DropDown_TaskInteract_Click"/>
+                            <Button Content="Füge Schaden zu an" Click="DropDown_TaskDealDamage_Click"/>
+                            <Button Content="Besiege" Click="DropDown_TaskKill_Click"/>
+                            <Button Content="Sammle" Click="DropDown_TaskCollect_Click"/>
+                            <Button Content="Rüste aus" Click="DropDown_TaskEquip_Click"/>
+                            <Button Content="Verbrauche" Click="DropDown_TaskConsume_Click"/>
+                            <Button Content="Bezwinge den Dungeon" Click="DropDown_TaskDungeon_Click"/>
+                            <Button Content="Betrete den Trigger" Click="DropDown_TaskTriggerEnter_Click"/>
+                            <Button Content="Verlasse den Trigger" Click="DropDown_TaskTriggerExit_Click"/>
+                        </StackPanel>
+                    </xctk:DropDownButton.DropDownContent>
+                </xctk:DropDownButton>
+                <TextBox Name="TextBox_TaskTargetTextBox" Grid.Column="2" Height="25" Margin="0, 30" VerticalAlignment="Top"/>
+                <TextBox Name="TextBox_TaskTargetCountTextBox" Grid.Column="2" Height="25" Margin="0, 60" VerticalAlignment="Top" Text="1"/>
+            </Grid>
+        </xctk:WizardPage>
+        <xctk:WizardPage x:Name="RewardPage" PageType="Interior" Title="Belohnungs-Details eingeben" Description="Gib die Details für die neue Quest ein." PreviousPage="{Binding ElementName=TaskPage}" CanFinish="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5px"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Honorar" ToolTip="Die Menge an Geld, die der Spieler nach Beenden der Quest erhält."/>
+                <TextBox Name="TextBox_RewardMoneyTextBox" Grid.Column="2" Height="25" VerticalAlignment="Top" Text="0"/>
+                <Label Content="Items" ToolTip="Die Items, die der Spieler für das Beenden der Quest erhält. IDs der Items mit einem Komma getrennt angeben." Margin="0, 35"/>
+                <TextBox Name="TextBox_RewardItemTextBox" Grid.Column="2" VerticalAlignment="Bottom" Height="150"/>
+            </Grid>
+        </xctk:WizardPage>
+    </xctk:Wizard>
+</Window>

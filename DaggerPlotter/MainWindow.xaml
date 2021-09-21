@@ -1,0 +1,52 @@
+﻿<Window x:Class="DaggerPlotter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DaggerPlotter"
+        mc:Ignorable="d"
+        WindowStyle="ThreeDBorderWindow"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Icon="Resources/icon.png"
+        Title="DaggerPlotter" Height="900" Width="1600">
+    <Grid Name="Grid">
+        <Image Source="Resources/bg.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"></Image>
+        <Rectangle Width="1600" Height="30" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="AliceBlue"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Image Source="Resources/graphbg.png" Height="450" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <TextBlock Name="Text_PathText" Height="30" VerticalAlignment="Top" TextAlignment="Right" FontSize="20" FontStyle="Italic"></TextBlock>
+        <TextBlock Name="Text_VersionText" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="20" Foreground="AliceBlue" Background="DarkSlateGray" Margin="0, 30"/>
+
+        <!--Ab hier: Wird nur angezeigt, wenn ein Projekt offen ist-->
+        <Label Content="Hinzufügen" Margin="0, 75" FontWeight="Bold" Width="100" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black"/>
+        <Button Name ="Button_Main_NewQuest" Content="Neue Quest" Width="100" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0, 100" Click="NewQuest_Click" IsEnabled="False"/>
+        <Button Name ="Button_Main_NewDialogue" Content="Neuer Dialog" Width="100" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0, 125" Click="NewDialog_Click" IsEnabled="False"/>
+
+        <!--Toolbar-Buttons-->
+        <Button Content="Datei" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" Click="Data_Click"></Button>
+        <Button Content="Bearbeiten" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" Margin="100,0" Click="Edit_Click"></Button>
+        <Button Content="Hilfe" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" Margin="200,0" Click="Help_Click"></Button>
+        <Button Name ="Button_Data_New" Content="Neu" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,30" Visibility="Hidden" Click="Data_New_Click"></Button>
+        <Button Name ="Button_Data_Open" Content="Öffnen" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,60" Visibility="Hidden" Click="Data_Open_Click"></Button>
+        <Button Name ="Button_Data_Close" Content="Projekt schließen" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,90" Visibility="Hidden" Click="Data_Close_Click"></Button>
+        <Button Name ="Button_Data_ShowInExplorer" Content="Im Explorer öffnen" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,120" Visibility="Hidden" Click="Data_ShowInExplorer_Click"></Button>
+        <Button Name ="Button_Data_Save" Content="Speichern" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,150" Visibility="Hidden" Click="Data_Save_Click"></Button>
+        <Button Name ="Button_Data_SaveAs" Content="Speichern unter..." Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,180" Visibility="Hidden" Click="Data_SaveAs_Click"></Button>
+        <Button Name ="Button_Data_Import" Content="Importieren" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,210" Visibility="Hidden" Click="Data_Import_Click"></Button>
+        <Button Name ="Button_Data_Export" Content="Exportieren" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,240" Visibility="Hidden" Click="Data_Export_Click"></Button>
+        <Button Name ="Button_Data_Quit" Content="Beenden" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,270" Visibility="Hidden" Click="Data_Quit_Click"></Button>
+        <Button Name ="Button_Edit_GoBack" Content="Schritt zurück" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,30" Visibility="Hidden"></Button>
+        <Button Name ="Button_Edit_GoForward" Content="Schritt vorwärts" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,60" Visibility="Hidden"></Button>
+        <Button Name ="Button_Edit_Cut" Content="Ausschneiden" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,90" Visibility="Hidden"></Button>
+        <Button Name ="Button_Edit_Copy" Content="Kopieren" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,120" Visibility="Hidden"></Button>
+        <Button Name ="Button_Edit_Paste" Content="Einfügen" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,150" Visibility="Hidden"></Button>
+        <Button Name ="Button_Edit_Search" Content="Suchen" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,180" Visibility="Hidden"></Button>
+        <Button Name ="Button_Edit_Mark" Content="Alles markieren" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,210" Visibility="Hidden"></Button>
+        <Button Name ="Button_Help_Information" Content="Info" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,30" Visibility="Hidden" Click="Help_Information_Click"></Button>
+        <Button Name ="Button_Help_VersionInformation" Content="Versionshinweise" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,60" Visibility="Hidden" Click="Help_VersionInformation_Click"></Button>
+    </Grid>
+</Window>
